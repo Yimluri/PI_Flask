@@ -1,0 +1,27 @@
+{%extends "plantilla.html"%}
+    
+{%block body%}
+
+    <div class="container">
+        <div class="results-container mt-5">
+            <h2 class="text-center">Resultados del Test</h2>
+            <div class="form-group">
+                <label for="result1">Respuesta 1:</label>
+                <input type="text" class="form-control" id="result1" readonly>
+            </div>
+            <div class="form-group">
+                <label for="result2">Respuesta 2:</label>
+                <input type="text" class="form-control" id="result2" readonly>
+            </div>
+            <a href="/test" class="btn btn-primary btn-block">Volver al Test</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('result1').value = localStorage.getItem('result1');
+        document.getElementById('result2').value = localStorage.getItem('result2');
+    </script>
+{%endblock%}
