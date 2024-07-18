@@ -5,7 +5,7 @@
 {% if messages %}
 {% for message in messages %}
 
-<div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+<div class="alert alert-primary alert-dismissible fade show mt-5" role="alert">
     <strong>{{message}}</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
@@ -13,27 +13,27 @@
 {% endif %}
 {% endwith %}
     <div class="container-lg mt-5 mb-5 w-25 p-3 border-opacity-75 rounded-4" style="background-color: #A6D8DE;">
-        <label for="formGroupExampleInput" class="form-label fs-2 text-black fw-semibold" style="display: flex; justify-content: center;">Inicio de sesión</label>
+        <label for="formGroupExampleInput" class="form-label fs-2 text-black fw-semibold" style="display: flex; justify-content: center;">Registro</label>
         <form action="/guardarMedico" method="post">
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">Nombre completo</label>
-                <input type="text" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="txtNombre" name="txtNombre" maxlength="11">
+                <input type="text" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="txtNombre" name="txtNombre" required>
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">Cédula profesional</label>
-                <input type="text" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="txtCedula" name="txtCedula">
+                <input type="text" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="txtCedula" name="txtCedula" minlength="11" maxlength="11" required>
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">Telefóno</label>
-                <input type="text" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="txtTelefono" name="txtTelefono">
+                <input type="text" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="txtTelefono" name="txtTelefono" required>
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">Correo</label>
-                <input type="text" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="txtCorreo" name="txtCorreo">
+                <input type="text" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="txtCorreo" name="txtCorreo" required>
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">Contraseña</label>
-                <input type="text" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="txtPassword" name="txtPassword">
+                <input type="text" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="txtPassword" name="txtPassword" required>
             </div>
             <div style="display: flex; justify-content: center;">
             <button class="btn mb-5 text-white" type="submit" style="background-color: #1c355E;">Registrar</button>

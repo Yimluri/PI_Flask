@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'proyectoi1'
+app.config['MYSQL_DB'] = 'PI_3'
 app.config['MYSQL_PORT'] = 3307
 
 mysql = MySQL(app)
@@ -50,6 +50,13 @@ def test():
 def respuestas():
    return render_template('respuestas.html')
 
+@app.route('/editar/<id>')
+def editar(id):
+     cur= mysql.connection.cursor()
+     cur.execute('select * from T_psicologos where ID_psicologo=%s',[id])
+     psi= cur.fetchone()
+     return render_template ('perfilMed.html', albums = psi)
+
 @app.route('/guardarMedico',methods=['POST'])
 def guardarMedico():
 
@@ -61,10 +68,25 @@ def guardarMedico():
          FPassword=request.form['txtPassword']
          
          cursor = mysql.connection.cursor()
-         cursor.execute('insert into table_med(nombre,cedula,telefono,correo,password) values(%s,%s,%s,%s,%s)', (FNombre,FCedula,FTelefono,FCorreo,FPassword))
+         cursor.execute('insert into T_psicologos(nombre,cedula,telefono,correo,password) values(%s,%s,%s,%s,%s)', (FNombre,FCedula,FTelefono,FCorreo,FPassword))
          mysql.connection.commit()
          flash('Registro guardado correctamente')
          return redirect(url_for('registroMedico'))
+
+@app.route('/guardarPaciente',methods=['POST'])
+def guardarPaciente():
+
+    if request.method== 'POST':
+         FNombre=request.form['txtNombre']
+         FTelefono=request.form['txtTelefono']
+         FUsuario=request.form['txtUsuario']
+         FPassword=request.form['txtPassword']
+         
+         cursor = mysql.connection.cursor()
+         cursor.execute('insert into T_pacientes(Nombre_Completo,Telefono,Usuario,Password) values(%s,%s,%s,%s)', (FNombre,FTelefono,FUsuario,FPassword))
+         mysql.connection.commit()
+         flash('Registro guardado correctamente')
+         return redirect(url_for('registroPaciente'))    
 
 
 if __name__ == '__main__':
