@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .profile-info {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .profile-info h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-info">
+        <h2>Perfil de Usuario</h2>
+        <p><strong>Nombre:</strong> {{ nombre }}</p>
+        <p><strong>Apellido Paterno:</strong> {{ apellido_paterno }}</p>
+        <p><strong>Apellido Materno:</strong> {{ apellido_materno }}</p>
+        <p><strong>Teléfono:</strong> {{ telefono }}</p>
+        <p><strong>Email:</strong> {{ email }}</p>
+        <p><strong>Especialidad:</strong> {{ especialidad }}</p>
+        <p><strong>Descripción de la Especialidad:</strong> {{ descripcion_especialidad }}</p>
+        <p><strong>Cédula:</strong> {{ cedula }}</p>
+    </div>
+</body>
+</html>
