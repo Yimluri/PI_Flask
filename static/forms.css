@@ -73,6 +73,10 @@ body {
     transition: background-color 0.3s ease; /* Efecto de transición al pasar el mouse sobre el botón */
   }
   
+  .button-container {
+    display: flex;
+    justify-content: flex-end; /* Alinea el botón a la derecha */
+  }
   button:hover,
   input[type="submit"]:hover {
     background-color: #1C355E; /* Color de fondo del botón al pasar el mouse */
