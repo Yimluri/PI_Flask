@@ -1,6 +1,7 @@
-from flask import Flask,session,request,render_template,url_for,redirect,flash
+from flask import Flask,request,render_template,url_for,redirect,session,flash
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -16,10 +17,8 @@ app.secret_key = 'mysecretkey'
 
 @app.route('/')
 def home():
-   print("Session:", session)
-   return render_template('index.html')
-def principal():
     return render_template('index.html')
+
 
 @app.route('/inicioS', methods=['GET', 'POST'])
 def inicioS():
@@ -57,7 +56,6 @@ def inicioS():
                     # Verifica la contraseña proporcionada contra la almacenada
                     if stored_password_plain == password:
                         session['username'] = username
-                        session['logged_in'] = True
                         return redirect(url_for('perfil'))
                     else:
                         flash('Contraseña incorrecta. Inténtalo de nuevo.')
@@ -69,13 +67,6 @@ def inicioS():
             flash('Usuario no encontrado. Inténtalo de nuevo.')
 
     return render_template('inicioS.html')
-
-@app.route('/logout')
-def logout():
-    session.pop('logged_in', None)
-    session.pop('username', None)
-    return redirect(url_for('home'))
-
 
 @app.route('/perfil', methods=['GET', 'POST'])
 def perfil():
@@ -201,17 +192,12 @@ def delete_profile():
 
     return redirect(url_for('home'))
 
-
 @app.route('/directorio')
 def directorio():
-   if not session.get('logged_in'):
-        return redirect(url_for('home'))
    return render_template('directorioM.html')
 
 @app.route('/perfilMedico')
 def perfilMedico():
-   if not session.get('logged_in'):
-        return redirect(url_for('home'))
    return render_template('perfilMed.html')
 
 @app.route('/registroMedico')
@@ -228,14 +214,10 @@ def registrOp():
 
 @app.route('/test')
 def test():
-   if not session.get('logged_in'):
-        return redirect(url_for('home'))
    return render_template('test.html')
 
 @app.route('/respuestas')
 def respuestas():
-   if not session.get('logged_in'):
-        return redirect(url_for('home'))
    return render_template('respuestas.html')
 
 @app.route('/editar/<id>')
@@ -281,20 +263,39 @@ def guardarMedico():
         return redirect(url_for('registroMedico'))  # Redirige el mensaje a la página
 
 
-@app.route('/guardarPaciente',methods=['POST'])
+@app.route('/guardarPaciente', methods=['POST'])
 def guardarPaciente():
+    if request.method == 'POST':
+        # Llamado a los datos del formulario
+        FNombre = request.form['txtNombre']
+        FApellidoPaterno = request.form['txtApellidoPaterno']
+        FApellidoMaterno = request.form['txtApellidoMaterno']
+        FGenero = request.form['txtGenero']
+        FFechaNacimiento = request.form['txtFechaNacimiento']
+        FTelefono = request.form['txtTelefono']
+        FEmail = request.form['txtEmail']
+        FPassword = request.form['txtPassword']
 
-    if request.method== 'POST':
-         FNombre=request.form['txtNombre']
-         FTelefono=request.form['txtTelefono']
-         FUsuario=request.form['txtUsuario']
-         FPassword=request.form['txtPassword']
-         
-         cursor = mysql.connection.cursor()
-         cursor.execute('insert into T_pacientes(Nombre_Completo,Telefono,Usuario,Password) values(%s,%s,%s,%s)', (FNombre,FTelefono,FUsuario,FPassword))
-         mysql.connection.commit()
-         flash('Registro guardado correctamente')
-         return redirect(url_for('registroPaciente'))    
+        # Encriptar contraseña
+        #hashed_password = generate_password_hash(FPassword)
+
+        # Con un cursor se ingresan los datos a la base de datos
+        cursor = mysql.connection.cursor()
+        cursor.execute('INSERT INTO nombres (nombre, apellido_paterno, apellido_materno) VALUES (%s, %s, %s)',
+                       (FNombre, FApellidoPaterno, FApellidoMaterno))
+        id_nombre = cursor.lastrowid  # Esta línea de código sirve para llamar al id del último registro realizado en la tabla
+        cursor.execute('INSERT INTO generos (genero) VALUES (%s)', (FGenero,))
+        id_genero = cursor.lastrowid
+        cursor.execute(
+            'INSERT INTO personas (id_nombre, id_genero, fecha_nacimiento, telefono, email) VALUES (%s, %s, %s, %s, %s)',
+            (id_nombre, id_genero, FFechaNacimiento, FTelefono, FEmail))
+        id_persona = cursor.lastrowid
+        fecha_actual = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        cursor.execute('INSERT INTO pacientes (id_persona, fecha_registro, password) VALUES (%s,%s,%s)',
+                       (id_persona, fecha_actual, FPassword))
+        mysql.connection.commit()
+        flash('Registro guardado correctamente')  # El mensaje del registro al momento de guardar
+        return redirect(url_for('registroPaciente'))  # Redirige el mensaje a la página
 
 
 if __name__ == '__main__':
