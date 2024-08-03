@@ -1,0 +1,75 @@
+      .escala {
+            display: flex;
+            gap: 10px; /* Espacio entre opciones */
+            margin-bottom: 20px; /* Espacio debajo de cada pregunta */
+        }
+        .escala label {
+            margin-right: 5px; /* Espacio entre la etiqueta y el radio */
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            transition: border-color 0.3s ease-in-out;
+        }
+        input[type="text"].invalid,
+        input[type="email"].invalid,
+        input[type="tel"].invalid {
+            border-color: red;
+        }
+        input[type="text"].valid,
+        input[type="email"].valid,
+        input[type="tel"].valid {
+            border-color: green;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .character-count {
+            color: #555;
+            font-size: 14px;
+            margin-top: 5px;
+            text-align: right;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            border: none;
+            background-color: #2c82c0;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #003260;
+        }
