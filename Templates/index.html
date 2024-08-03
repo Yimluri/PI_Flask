@@ -3,55 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ProjectMentalBalance</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='cssinicioS.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='test.css') }}">
-    
 </head>
-
 <body class="bg-dark.bg-gradient">
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand text-white" href="/">Home</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="/">Project Mental Balance</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-             <!-- <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" href="/test">Test</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="/directorio">Directorio</a>
-              </li>-->
-              <li class="nav-item">
-                <a class="nav-link text-white" href="/inicioS">Iniciar Sesión</a>
-              </li>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/inicioS">Iniciar Sesión o registrarse</a>
+                </li>
             </ul>
-          </div>
         </div>
-      </nav>
-    <div class="container-lg mt-5 mb-5 w-75 p-3 border-opacity-75 rounded-4" style="background-color: #ffffff91;">
-        <p class="fw-semibold fs-2">
-            Bienvenido!!
-        </p>
-        
-        <p class=" fs-5"> Si estas en este lugar significa que tienes dudas acerca de tu salud mental, hay que recordar que la salud mental 
-            es muy importante, ya que dependiendo cómo estemos mentalmente puede afectar significativamente nuestras vidas,
-            empezando por cosas pequeñas como perder el apetito, el insomnio, no querer hacer nada, desmotivación, etc.
-        </p>
-        <p class=" fs-5">
-
-            Si bien, no puedes autodiagnosticarte, es importante que sepas detectar cuáles cosas han pasado en tu vida que ponen en 
-            riesgo tu salud mental, es por eso que te ayudaremos!!
-        </p>
-        <p class=" fs-5">
-            Este sitio web esta destinado a personas que no saben a donde ir mientras dudan de tener una buena salud mental,
-            los que tienen dudas son bienvenidos, y sino también son bienvenidos a conocer más sobre la salud mental y por qué es
-            tan importante como la salud física. 
-        </p>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</nav>
+
+<div class="container-lg mt-5 mb-5 w-75 p-3 border-opacity-75 rounded-4" style="background-color: rgba(255,255,255,0.5);">
+    <p class="fw-semibold fs-2">Bienvenido!!</p>
+    <p class="fs-5"> Si estas en este lugar significa que tienes dudas acerca de tu salud mental, hay que recordar que la salud mental
+        es muy importante, ya que dependiendo cómo estemos mentalmente puede afectar significativamente nuestras vidas,
+        empezando por cosas pequeñas como perder el apetito, el insomnio, no querer hacer nada, desmotivación, etc.</p>
+    <p class="fs-5">
+        Si bien, no puedes autodiagnosticarte, es importante que sepas detectar cuáles cosas han pasado en tu vida que ponen en
+        riesgo tu salud mental, es por eso que te ayudaremos!!
+    </p>
+    <p class="fs-5">
+        Este sitio web esta destinado a personas que no saben a donde ir mientras dudan de tener una buena salud mental,
+        los que tienen dudas son bienvenidos, y sino también son bienvenidos a conocer más sobre la salud mental y por qué es
+        tan importante como la salud física.
+    </p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

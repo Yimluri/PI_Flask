@@ -13,9 +13,11 @@ app.config['MYSQL_PORT'] = 3307
 mysql = MySQL(app)
 app.secret_key = 'mysecretkey'
 
+
 @app.route('/')
 def principal():
-   return render_template('index.html')
+    return render_template('index.html')
+
 
 @app.route('/inicioS', methods=['GET', 'POST'])
 def inicioS():

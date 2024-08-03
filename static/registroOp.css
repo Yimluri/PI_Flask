@@ -1,0 +1,23 @@
+.custom-button {
+    background-color: #5B6670;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 10px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+    display: inline-block;
+}
+.custom-button:hover {
+    background-color: #ffffff;
+    transform: scale(1.3);
+}
+.legend {
+    color: #333;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 20px;
+    max-width: 300px; /* Ajusta este valor según sea necesario */
+}
