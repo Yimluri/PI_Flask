@@ -5,94 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='test.css') }}">
-    <style>
-        body {
-            background: rgb(166,216,222);
-            background: linear-gradient(45deg, rgba(166,216,222,1) 0%, rgba(111,168,173,1) 18%, rgba(166,216,222,1) 38%, rgba(111,168,173,1) 58%, rgba(166,216,222,1) 78%);
+    <link rel="stylesheet" href="{{ url_for('static', filename='perfil.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function confirmUpdate(event) {
+            event.preventDefault(); // Evita el envío del formulario
+            const form = event.target;
+            if (confirm("¿Estás seguro de que deseas actualizar los datos?")) {
+                // Si el usuario confirma, envía el formulario
+                form.submit();
+            } else {
+                // Si el usuario cancela, no hace nada
+                alert("Actualización cancelada.");
+            }
         }
-        .navbar {
-            background: none;
-            padding: 15px;
-            display: flex;
-            justify-content: space-around;
+
+        function confirmDelete(event) {
+            event.preventDefault(); // Evita el envío del formulario
+            if (confirm("¿Estás seguro de que deseas eliminar tu perfil? Esta acción no se puede deshacer.")) {
+                // Si el usuario confirma, redirige a la URL de eliminación
+                window.location.href = event.target.href;
+            } else {
+                // Si el usuario cancela, no hace nada
+                alert("Eliminación cancelada.");
+            }
         }
-        .navbar a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            padding: 10px 20px;
-        }
-        .navbar a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-        }
-        .container-custom {
-            display: flex;
-            flex-wrap: wrap;
-            margin: 20px; /* Margen alrededor del contenedor principal */
-        }
-        .form-container, .description-container {
-            flex: 1;
-            max-width: 50%; /* Máximo ancho del contenedor */
-            padding: 20px; /* Espacio interno alrededor del contenido */
-            box-sizing: border-box; /* Incluye padding en el cálculo del ancho */
-        }
-        .description-container {
-            text-align: center; /* Centra el texto y la imagen dentro del contenedor */
-        }
-        .description-container img {
-            max-width: 100%; /* Asegura que la imagen se ajuste al ancho del contenedor */
-            height: auto;
-            border-radius: 8px; /* Bordes redondeados para la imagen */
-        }
-        .description-container h3 {
-            margin-top: 1rem;
-        }
-        .description-container p {
-            margin-top: 0.5rem;
-        }
-        form {
-            background-color: #f4f4f4;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        input[type="text"], input[type="email"], input[type="password"], textarea {
-            border: 1px solid #78f6ff; /* Color del borde del input */
-            padding: 10px;
-            border-radius: 4px;
-            background-color: #d2e5e7; /* Color de fondo del input */
-            font-size: 16px;
-            width: 100%; /* Asegura que el input ocupe todo el ancho del formulario */
-            box-sizing: border-box; /* Incluye padding y border en el cálculo del width */
-            margin-bottom: 10px; /* Espacio inferior entre los inputs */
-        }
-        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
-            border-color: #007bff; /* Color del borde al estar en foco */
-            outline: none; /* Elimina el contorno predeterminado del navegador */
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Efecto de sombra al estar en foco */
-        }
-        button, input[type="submit"] {
-            background-color: #6FA8AD; /* Color de fondo del botón */
-            color: #fff; /* Color del texto del botón */
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px; 
-            transition: background-color 0.3s ease; /* Efecto de transición al pasar el mouse sobre el botón */
-        }
-        button:hover, input[type="submit"]:hover {
-            background-color: #1C355E; /* Color de fondo del botón al pasar el mouse */
-        }
-        .button-container {
-            display: flex;
-            justify-content: flex-end; /* Alinea el botón a la derecha */
-        }
-    </style>
+    </script>
 </head>
 
 <body>
@@ -111,26 +49,12 @@
                         <a class="nav-link text-white" href="/directorio">Directorio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/inicioS">Iniciar Sesión</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Salir</a>
+                        <a class="nav-link text-white" href="/logout">Salir</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-primary alert-dismissible fade show mt-3" role="alert">
-        <strong>{{message}}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
     
     <div class="container-custom">
         <!-- Contenedor para la foto y descripción -->
@@ -144,60 +68,65 @@
         <div class="form-container">
             <div class="container-lg p-3 border-opacity-75 rounded-4">
                 <h2 class="text-center fs-2 text-black fw-semibold">Perfil</h2>
-                <form action="/perfil" method="post">
+                <form action="/perfil" method="post" onsubmit="confirmUpdate(event)">
                     <div class="mb-3">
                         <label for="txtNombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtNombre" name="txtNombre" value="{{ nombre }}" required>
+                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtNombre" name="txtNombre" value="{{ nombre }}">
                     </div>
                     <div class="mb-3">
                         <label for="txtApellidoPaterno" class="form-label">Apellido Paterno</label>
-                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtApellidoPaterno" name="txtApellidoPaterno" value="{{ apellido_paterno }}" required>
+                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtApellidoPaterno" name="txtApellidoPaterno" value="{{ apellido_paterno }}">
                     </div>
                     <div class="mb-3">
                         <label for="txtApellidoMaterno" class="form-label">Apellido Materno</label>
-                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtApellidoMaterno" name="txtApellidoMaterno" value="{{ apellido_materno }}" required>
+                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtApellidoMaterno" name="txtApellidoMaterno" value="{{ apellido_materno }}">
                     </div>
                     <div class="mb-3">
                         <label for="txtGenero" class="form-label">Género</label>
-                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtGenero" name="txtGenero" value="{{ genero }}" required>
+                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtGenero" name="txtGenero" value="{{ genero }}">
                     </div>
                     <div class="mb-3">
                         <label for="txtFechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-                        <input type="date" class="form-control border-primary border-opacity-75 rounded" id="txtFechaNacimiento" name="txtFechaNacimiento" value="{{ fecha_nacimiento }}" required>
+                        <input type="date" class="form-control border-primary border-opacity-75 rounded" id="txtFechaNacimiento" name="txtFechaNacimiento" value="{{ Fecha_nacimiento }}">
                     </div>
                     <div class="mb-3">
                         <label for="txtTelefono" class="form-label">Teléfono</label>
-                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtTelefono" name="txtTelefono" value="{{ telefono }}" required>
+                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtTelefono" name="txtTelefono" value="{{ telefono }}">
                     </div>
                     <div class="mb-3">
                         <label for="txtEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control border-primary border-opacity-75 rounded" id="txtEmail" name="txtEmail" value="{{ email }}" required>
+                        <input type="email" class="form-control border-primary border-opacity-75 rounded" id="txtEmail" name="txtEmail" value="{{ email }}">
                     </div>
                     <div class="mb-3">
                         <label for="txtEspecialidad" class="form-label">Especialidad</label>
-                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtEspecialidad" name="txtEspecialidad" value="{{ especialidad }}" required>
+                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtEspecialidad" name="txtEspecialidad" value="{{ especialidad }}">
                     </div>
                     <div class="mb-3">
                         <label for="txtDescripcionEspecialidad" class="form-label">Descripción Especialidad</label>
-                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtDescripcionEspecialidad" name="txtDescripcionEspecialidad" value="{{ descripcion_especialidad }}" required>
+                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtDescripcionEspecialidad" name="txtDescripcionEspecialidad" value="{{ descripcion_especialidad }}">
                     </div>
                     <div class="mb-3">
                         <label for="txtCedula" class="form-label">Cédula</label>
-                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtCedula" name="txtCedula" value="{{ cedula }}" required>
+                        <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtCedula" name="txtCedula" value="{{ cedula }}">
                     </div>
                     <div class="mb-3">
                         <label for="txtPassword" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control border-primary border-opacity-75 rounded" id="txtPassword" name="txtPassword" value="{{ password }}" required>
+                        <input type="password" class="form-control border-primary border-opacity-75 rounded" id="txtPassword" name="txtPassword" value="{{ password }}">
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn mb-5 text-white" style="background-color: #1c355E;">Actualizar</button>
+                        <button type="submit" class="button">Actualizar</button>
+                        <a href="{{ url_for('delete_profile') }}" class="button" onclick="confirmDelete(event)">Eliminar Perfil</a>
                     </div>
                 </form>
+
+                <!-- Enlace para eliminar el perfil 
+                <div class="d-flex justify-content-center">
+                    <a href="{{ url_for('delete_profile') }}" class="button" onclick="confirmDelete(event)">Eliminar Perfil</a>
+                </div>-->
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
 

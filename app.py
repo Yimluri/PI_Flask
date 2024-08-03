@@ -1,4 +1,4 @@
-from flask import Flask,request,render_template,url_for,redirect,session,flash
+from flask import Flask,session,request,render_template,url_for,redirect,flash
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -14,8 +14,10 @@ mysql = MySQL(app)
 app.secret_key = 'mysecretkey'
 
 @app.route('/')
-def principal():
+def home():
+   print("Session:", session)
    return render_template('index.html')
+
 
 @app.route('/inicioS', methods=['GET', 'POST'])
 def inicioS():
@@ -53,6 +55,7 @@ def inicioS():
                     # Verifica la contraseña proporcionada contra la almacenada
                     if stored_password_plain == password:
                         session['username'] = username
+                        session['logged_in'] = True
                         return redirect(url_for('perfil'))
                     else:
                         flash('Contraseña incorrecta. Inténtalo de nuevo.')
@@ -65,57 +68,76 @@ def inicioS():
 
     return render_template('inicioS.html')
 
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    session.pop('username', None)
+    return redirect(url_for('home'))
+
+
 @app.route('/perfil', methods=['GET', 'POST'])
 def perfil():
+    if not session.get('logged_in'):
+        return redirect(url_for('home'))
+
     if 'username' in session:
         username = session['username']
-        
+
         if request.method == 'POST':
             # Si se envía el formulario, actualiza los datos del perfil
             nombre = request.form['txtNombre']
             apellido_paterno = request.form['txtApellidoPaterno']
             apellido_materno = request.form['txtApellidoMaterno']
+            genero = request.form['txtGenero']
+            FechaNacimiento = request.form['txtFechaNacimiento']
             telefono = request.form['txtTelefono']
             email = request.form['txtEmail']
             especialidad = request.form['txtEspecialidad']
             descripcion_especialidad = request.form['txtDescripcionEspecialidad']
             cedula = request.form['txtCedula']
             password = request.form['txtPassword']
-            
-            # Actualizar los datos en la base de datos
+
             cursor = mysql.connection.cursor()
+
+            # Actualizar la tabla nombres
             cursor.execute('''
                 UPDATE nombres
                 SET nombre = %s, apellido_paterno = %s, apellido_materno = %s
                 WHERE nombre = %s
             ''', (nombre, apellido_paterno, apellido_materno, username))
-            
+
+            # Actualizar la tabla personas
             cursor.execute('''
                 UPDATE personas
-                SET telefono = %s, email = %s
+                SET telefono = %s, email = %s, Fecha_nacimiento = %s, id_genero = (SELECT id_genero FROM generos WHERE genero = %s)
                 WHERE id_nombre = (SELECT id_nombre FROM nombres WHERE nombre = %s)
-            ''', (telefono, email, nombre))
-            
+            ''', (telefono, email, FechaNacimiento, genero, nombre))
+
+            # Actualizar la tabla profesionales
             cursor.execute('''
                 UPDATE profesionales
                 SET cedula = %s, password = %s
                 WHERE id_persona = (SELECT id_persona FROM personas WHERE id_nombre = (SELECT id_nombre FROM nombres WHERE nombre = %s))
             ''', (cedula, password, nombre))
-            
+
             mysql.connection.commit()
+            cursor.close()
+
             flash('Datos actualizados correctamente')
             return redirect(url_for('perfil'))
-        
-        # Consulta para obtener el perfil del usuario
+
+        # Consulta para obtener el perfil del usuario incluyendo genero y Fecha_nacimiento
         cursor = mysql.connection.cursor()
         cursor.execute('''
             SELECT n.nombre, n.apellido_paterno, n.apellido_materno, 
-                   p.telefono, p.email, e.nombre AS especialidad, e.descripcion AS descripcion_especialidad, 
+                   p.telefono, p.email, p.Fecha_nacimiento, g.genero, 
+                   e.nombre AS especialidad, e.descripcion AS descripcion_especialidad,
                    pr.cedula, pr.password
             FROM nombres n
             JOIN personas p ON n.id_nombre = p.id_nombre
             JOIN profesionales pr ON p.id_persona = pr.id_persona
             JOIN especialidades e ON pr.id_especialidad = e.id_especialidad
+            JOIN generos g ON p.id_genero = g.id_genero
             WHERE n.nombre = %s
         ''', (username,))
         profile_data = cursor.fetchone()
@@ -123,26 +145,71 @@ def perfil():
 
         if profile_data:
             # Descompón los datos en variables
-            nombre, apellido_paterno, apellido_materno, telefono, email, especialidad, descripcion_especialidad, cedula, password = profile_data
+            nombre, apellido_paterno, apellido_materno, telefono, email, Fecha_nacimiento, genero, especialidad, descripcion_especialidad, cedula, password = profile_data
             
             # Pasa los datos a la plantilla
             return render_template('perfil.html', nombre=nombre, apellido_paterno=apellido_paterno, 
                                    apellido_materno=apellido_materno, telefono=telefono, 
-                                   email=email, especialidad=especialidad, 
-                                   descripcion_especialidad=descripcion_especialidad, cedula=cedula, password=password)
+                                   email=email, Fecha_nacimiento=Fecha_nacimiento, genero=genero,
+                                   especialidad=especialidad, descripcion_especialidad=descripcion_especialidad, 
+                                   cedula=cedula, password=password)
         else:
             flash('Datos del perfil no encontrados.')
             return redirect(url_for('inicioS'))
     else:
         return redirect(url_for('inicioS'))
 
+@app.route('/delete_profile', methods=['GET'])
+def delete_profile():
+    if not session.get('logged_in'):
+        return redirect(url_for('home'))
+
+    if 'username' in session:
+        username = session['username']
+
+        cursor = mysql.connection.cursor()
+
+        # Elimina la entrada de 'profesionales'
+        cursor.execute('''
+            DELETE FROM profesionales
+            WHERE id_persona = (SELECT id_persona FROM personas WHERE id_nombre = (SELECT id_nombre FROM nombres WHERE nombre = %s))
+        ''', (username,))
+
+        # Elimina la entrada de 'personas'
+        cursor.execute('''
+            DELETE FROM personas
+            WHERE id_nombre = (SELECT id_nombre FROM nombres WHERE nombre = %s)
+        ''', (username,))
+
+        # Elimina la entrada de 'nombres'
+        cursor.execute('''
+            DELETE FROM nombres
+            WHERE nombre = %s
+        ''', (username,))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        # Cierra la sesión del usuario
+        session.pop('logged_in', None)
+        session.pop('username', None)
+
+        flash('Perfil eliminado correctamente')
+        return redirect(url_for('home'))
+
+    return redirect(url_for('home'))
+
 
 @app.route('/directorio')
 def directorio():
+   if not session.get('logged_in'):
+        return redirect(url_for('home'))
    return render_template('directorioM.html')
 
 @app.route('/perfilMedico')
 def perfilMedico():
+   if not session.get('logged_in'):
+        return redirect(url_for('home'))
    return render_template('perfilMed.html')
 
 @app.route('/registroMedico')
@@ -159,10 +226,14 @@ def registrOp():
 
 @app.route('/test')
 def test():
+   if not session.get('logged_in'):
+        return redirect(url_for('home'))
    return render_template('test.html')
 
 @app.route('/respuestas')
 def respuestas():
+   if not session.get('logged_in'):
+        return redirect(url_for('home'))
    return render_template('respuestas.html')
 
 @app.route('/editar/<id>')

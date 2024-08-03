@@ -1,0 +1,116 @@
+body {
+    background: rgb(166,216,222);
+    background: linear-gradient(45deg, rgba(166,216,222,1) 0%, rgba(111,168,173,1) 18%, rgba(166,216,222,1) 38%, rgba(111,168,173,1) 58%, rgba(166,216,222,1) 78%);
+}
+.navbar {
+    background: none;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+.container-custom {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px; /* Margen alrededor del contenedor principal */
+    height: auto;
+}
+.form-container, .description-container {
+    flex: 1;
+    max-width: 50%; /* Máximo ancho del contenedor */
+    padding: 10px; /* Espacio interno alrededor del contenido */
+    box-sizing: border-box; /* Incluye padding en el cálculo del ancho */
+}
+.description-container {
+    text-align: center; /* Centra el texto y la imagen dentro del contenedor */
+}
+.description-container img {
+    max-width: 100%; /* Asegura que la imagen se ajuste al ancho del contenedor */
+    height: auto;
+    border-radius: 8px; /* Bordes redondeados para la imagen */
+}
+.description-container h3 {
+    margin-top: 2rem;
+}
+.description-container p {
+    margin-top: 0.5rem;
+}
+form {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+input[type="text"], input[type="email"], input[type="password"], textarea {
+    border: 1px solid #78f6ff; /* Color del borde del input */
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #d2e5e7; /* Color de fondo del input */
+    font-size: 16px;
+    width: 100%; /* Asegura que el input ocupe todo el ancho del formulario */
+    box-sizing: border-box; /* Incluye padding y border en el cálculo del width */
+    margin-bottom: 10px; /* Espacio inferior entre los inputs */
+}
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
+    border-color: #007bff; /* Color del borde al estar en foco */
+    outline: none; /* Elimina el contorno predeterminado del navegador */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Efecto de sombra al estar en foco */
+}
+button, input[type="submit"] {
+    height: 50px; /* Altura del botón */
+    line-height: 50px; /* Alineación vertical del texto */
+    display: inline-flex; /* Usar flexbox para centrar el contenido */
+    align-items: center; /* Alinear verticalmente el contenido en el centro */
+    padding: 0 10px; /* Espacio interno */
+    font-size: 16px; /* Tamaño del texto */
+    border-radius: 4px; /* Bordes redondeados */
+    text-align: center; /* Alinear el texto en el centro */
+    color: #fff; /* Color del texto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para el color de fondo y la sombra */
+    margin: 10px; /* Espacio externo */
+    background-color: #6FA8AD; /* Color de fondo del botón */
+    border: none; /* Sin borde visible */
+}
+button:hover, input[type="submit"]:hover {
+    background-color: #1C355E; /* Color de fondo del botón al pasar el mouse */
+}
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Alinea el botón a la derecha */
+}
+a.button {
+    height: 50px;
+    line-height: 50px;
+    display: inline-flex; /* Asegura que el enlace se comporte como un bloque en línea */
+    padding: 0px 10px; /* Espacio interno alrededor del texto del botón */
+    font-size: 16px; /* Tamaño del texto */
+    color: #fff; /* Color del texto */
+    background-color: #5B6670; /* Color de fondo del botón */
+    border: none; /* Sin borde visible */
+    border-radius: 4px; /* Bordes redondeados */
+    text-align: center; /* Alinea el texto en el centro */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para el color de fondo y la sombra */
+    margin: 10px;  
+}
+
+  a.button:hover {
+    background-color: #202224; /* Color de fondo cuando el ratón pasa sobre el botón */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto de profundidad */
+  }
+
+  a.button:active {
+    background-color: #004494; /* Color de fondo al hacer clic en el botón */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra reducida al hacer clic */
+  }

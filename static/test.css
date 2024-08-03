@@ -1,13 +1,19 @@
 body {
     background: rgb(166,216,222);
     background: linear-gradient(45deg, rgba(166,216,222,1) 0%, rgba(111,168,173,1) 18%, rgba(166,216,222,1) 38%, rgba(111,168,173,1) 58%, rgba(166,216,222,1) 78%);
-    height: 100vh; 
+    background-size: cover; /* Asegura que el fondo cubra toda la ventana */
+    background-repeat: no-repeat; /* Evita que el fondo se repita */
+    background-attachment: fixed; /* Fija el fondo para que no se desplace al hacer scroll */
+    background-position: center center; /* Centra el fondo en la ventana */
+    height: 100vh; /* Ocupa toda la altura de la vista */
+    margin: 0; /* Elimina el margen por defecto del body */
 }
     .navbar {
       background: none;
       padding: 15px;
       display: flex;
       justify-content: space-around;
+      
   }
   
   .navbar a {
