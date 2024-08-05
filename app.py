@@ -1,8 +1,7 @@
-from flask import Flask,request,render_template,url_for,redirect,session,flash
+from flask import Flask, request, render_template, url_for, redirect, session, flash
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-
 
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
@@ -67,6 +66,7 @@ def inicioS():
             flash('Usuario no encontrado. Inténtalo de nuevo.')
 
     return render_template('inicioS.html')
+
 
 @app.route('/perfil', methods=['GET', 'POST'])
 def perfil():
@@ -139,18 +139,19 @@ def perfil():
         if profile_data:
             # Descompón los datos en variables
             nombre, apellido_paterno, apellido_materno, telefono, email, Fecha_nacimiento, genero, especialidad, descripcion_especialidad, cedula, password = profile_data
-            
+
             # Pasa los datos a la plantilla
-            return render_template('perfil.html', nombre=nombre, apellido_paterno=apellido_paterno, 
-                                   apellido_materno=apellido_materno, telefono=telefono, 
+            return render_template('perfil.html', nombre=nombre, apellido_paterno=apellido_paterno,
+                                   apellido_materno=apellido_materno, telefono=telefono,
                                    email=email, Fecha_nacimiento=Fecha_nacimiento, genero=genero,
-                                   especialidad=especialidad, descripcion_especialidad=descripcion_especialidad, 
+                                   especialidad=especialidad, descripcion_especialidad=descripcion_especialidad,
                                    cedula=cedula, password=password)
         else:
             flash('Datos del perfil no encontrados.')
             return redirect(url_for('inicioS'))
     else:
         return redirect(url_for('inicioS'))
+
 
 @app.route('/delete_profile', methods=['GET'])
 def delete_profile():
@@ -192,40 +193,49 @@ def delete_profile():
 
     return redirect(url_for('home'))
 
+
 @app.route('/directorio')
 def directorio():
-   return render_template('directorioM.html')
+    return render_template('directorioM.html')
+
 
 @app.route('/perfilMedico')
 def perfilMedico():
-   return render_template('perfilMed.html')
+    return render_template('perfilMed.html')
+
 
 @app.route('/registroMedico')
 def registroMedico():
-   return render_template('registroMed.html')
+    return render_template('registroMed.html')
+
 
 @app.route('/registroPaciente')
 def registroPaciente():
-   return render_template('registro.html')
+    return render_template('registro.html')
+
 
 @app.route('/registrOp')
 def registrOp():
-   return render_template('registrOp.html')
+    return render_template('registrOp.html')
+
 
 @app.route('/test')
 def test():
-   return render_template('test.html')
+    return render_template('test.html')
+
 
 @app.route('/respuestas')
 def respuestas():
-   return render_template('respuestas.html')
+    return render_template('respuestas.html')
+
 
 @app.route('/editar/<id>')
 def editar(id):
-     cur= mysql.connection.cursor()
-     cur.execute('select * from T_psicologos where ID_psicologo=%s',[id])
-     psi= cur.fetchone()
-     return render_template ('perfilMed.html', albums = psi)
+    cur = mysql.connection.cursor()
+    cur.execute('select * from T_psicologos where ID_psicologo=%s', [id])
+    psi = cur.fetchone()
+    return render_template('perfilMed.html', albums=psi)
+
 
 @app.route('/guardarMedico', methods=['POST'])
 def guardarMedico():
@@ -242,7 +252,7 @@ def guardarMedico():
         FDescripcionEspecialidad = request.form['txtDescripcionEspecialidad']
         FCedula = request.form['txtCedula']
         Password = request.form['txtPassword']
-        
+
         # Con un cursor se ingresan los datos a la base de datos
         cursor = mysql.connection.cursor()
         cursor.execute('INSERT INTO nombres (nombre, apellido_paterno, apellido_materno) VALUES (%s, %s, %s)',
@@ -250,14 +260,16 @@ def guardarMedico():
         id_nombre = cursor.lastrowid  # Esta línea de código sirve para llamar al id del último registro realizado en la tabla
         cursor.execute('INSERT INTO generos (genero) VALUES (%s)', (FGenero,))
         id_genero = cursor.lastrowid
-        cursor.execute('INSERT INTO personas (id_nombre, id_genero, fecha_nacimiento, telefono, email) VALUES (%s, %s, %s, %s, %s)',
-                       (id_nombre, id_genero, FFechaNacimiento, FTelefono, FEmail))
+        cursor.execute(
+            'INSERT INTO personas (id_nombre, id_genero, fecha_nacimiento, telefono, email) VALUES (%s, %s, %s, %s, %s)',
+            (id_nombre, id_genero, FFechaNacimiento, FTelefono, FEmail))
         id_persona = cursor.lastrowid
         cursor.execute('INSERT INTO especialidades (nombre, descripcion) VALUES (%s, %s)',
                        (FEspecialidad, FDescripcionEspecialidad))
         id_especialidad = cursor.lastrowid
-        cursor.execute('INSERT INTO profesionales (id_persona, id_especialidad, cedula, password) VALUES (%s, %s, %s, %s)', 
-                       (id_persona, id_especialidad, FCedula, Password))
+        cursor.execute(
+            'INSERT INTO profesionales (id_persona, id_especialidad, cedula, password) VALUES (%s, %s, %s, %s)',
+            (id_persona, id_especialidad, FCedula, Password))
         mysql.connection.commit()
         flash('Registro guardado correctamente')  # El mensaje del registro al momento de guardar
         return redirect(url_for('registroMedico'))  # Redirige el mensaje a la página
@@ -277,7 +289,7 @@ def guardarPaciente():
         FPassword = request.form['txtPassword']
 
         # Encriptar contraseña
-        #hashed_password = generate_password_hash(FPassword)
+        # hashed_password = generate_password_hash(FPassword)
 
         # Con un cursor se ingresan los datos a la base de datos
         cursor = mysql.connection.cursor()
@@ -299,6 +311,4 @@ def guardarPaciente():
 
 
 if __name__ == '__main__':
-  app.run(port=3000,debug=True)
-
-
+    app.run(port=3000, debug=True)
