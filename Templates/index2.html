@@ -12,7 +12,7 @@
     {% if session.get('logged_in') %}
         <a href="#menu">Menu</a>
     {% else %}
-        <a class="button" href="/inicioS">INICIAR SESION</a>
+        <a class="btn btn2-custom" href="/inicioS">INICIAR SESION</a>
     {% endif %}
 </header>
 
@@ -23,7 +23,7 @@
         <li><a href="/">Inicio</a></li>
         <li><a href="/test">TEST</a></li>
         <li><a href="/directorio">DIRECTORIO</a></li>
-        <li><a href="/logout" class="nav-link text-white"></a></li>
+        <li><a href="/logout" class="nav-link text-white">Salir</a></li>
     </ul>
 </nav>
 {% endif %}

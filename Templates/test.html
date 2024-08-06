@@ -8,203 +8,216 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='cssinicioS.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='testv2.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='test.css') }}">
-</head>
-<body class="bg-dark bg-gradient">
-<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white" href="/">Project Mental Balance</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-            {% if session.get('logged_in') %}
-              <li class="nav-item">
-                <a class="nav-link text-white" href="/directorio">Directorio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" href="/perfil">Perfil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="/logout">Salir</a>
-              </li>
-            {%else%}
-            {% endif %}
-            </ul>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/inicioS">Iniciar Sesión o registrarse</a>
-                </li>
-            </ul>
+    <!DOCTYPE html>
+    <html lang="en">
+    </head>
+    <body>
+        <div class="container mt-5 mb-5 p-3 border-opacity-75 rounded-4" style="background-color: #ffffff;">
+            <h1 class="text-center mb-4" style="color: #2c387e;">Formulario de Salud Mental</h1>
+            <form id="formulario">
+    
+                <!-- Preguntas del formulario -->
+                <div class="mb-3">
+                    <label for="pregunta1" class="form-label">¿Con qué frecuencia te sientes preocupado o ansioso por diferentes aspectos de tu vida diaria?</label>
+                    <select class="form-select border-primary border-opacity-75 rounded" id="pregunta1" name="pregunta1" required>
+                        <option value="1">1 - Nunca</option>
+                        <option value="2">2 - Raramente</option>
+                        <option value="3">3 - A veces</option>
+                        <option value="4">4 - Frecuentemente</option>
+                        <option value="5">5 - Siempre</option>
+                    </select>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="pregunta2" class="form-label">¿Experimentas síntomas físicos como dolores de cabeza, tensión muscular o problemas digestivos cuando estás bajo estrés?</label>
+                    <select class="form-select border-primary border-opacity-75 rounded" id="pregunta2" name="pregunta2" required>
+                        <option value="1">1 - Nunca</option>
+                        <option value="2">2 - Raramente</option>
+                        <option value="3">3 - A veces</option>
+                        <option value="4">4 - Frecuentemente</option>
+                        <option value="5">5 - Siempre</option>
+                    </select>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="pregunta3" class="form-label">¿Cómo describirías la calidad de tu sueño? ¿Tienes dificultades para conciliar el sueño o te despiertas con frecuencia durante la noche?</label>
+                    <select class="form-select border-primary border-opacity-75 rounded" id="pregunta3" name="pregunta3" required>
+                        <option value="1">1 - Nunca</option>
+                        <option value="2">2 - Raramente</option>
+                        <option value="3">3 - A veces</option>
+                        <option value="4">4 - Frecuentemente</option>
+                        <option value="5">5 - Siempre</option>
+                    </select>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="pregunta4" class="form-label">¿Con qué frecuencia sientes ira o frustración intensa? ¿Cómo manejas estos sentimientos?</label>
+                    <select class="form-select border-primary border-opacity-75 rounded" id="pregunta4" name="pregunta4" required>
+                        <option value="1">1 - Nunca</option>
+                        <option value="2">2 - Raramente</option>
+                        <option value="3">3 - A veces</option>
+                        <option value="4">4 - Frecuentemente</option>
+                        <option value="5">5 - Siempre</option>
+                    </select>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="pregunta5" class="form-label">¿Cómo describirías tu estado de ánimo general en las últimas dos semanas? ¿Te has sentido más triste, irritable o desesperanzado de lo habitual?</label>
+                    <select class="form-select border-primary border-opacity-75 rounded" id="pregunta5" name="pregunta5" required>
+                        <option value="1">1 - Nunca</option>
+                        <option value="2">2 - Raramente</option>
+                        <option value="3">3 - A veces</option>
+                        <option value="4">4 - Frecuentemente</option>
+                        <option value="5">5 - Siempre</option>
+                    </select>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="pregunta6" class="form-label">¿Has notado cambios en tus relaciones con amigos, familiares o compañeros de trabajo? ¿Te sientes más aislado o distante de los demás?</label>
+                    <select class="form-select border-primary border-opacity-75 rounded" id="pregunta6" name="pregunta6" required>
+                        <option value="1">1 - Nunca</option>
+                        <option value="2">2 - Raramente</option>
+                        <option value="3">3 - A veces</option>
+                        <option value="4">4 - Frecuentemente</option>
+                        <option value="5">5 - Siempre</option>
+                    </select>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="pregunta7" class="form-label">¿Tienes dificultades para concentrarte o mantener la atención en tus tareas diarias?</label>
+                    <select class="form-select border-primary border-opacity-75 rounded" id="pregunta7" name="pregunta7" required>
+                        <option value="1">1 - Nunca</option>
+                        <option value="2">2 - Raramente</option>
+                        <option value="3">3 - A veces</option>
+                        <option value="4">4 - Frecuentemente</option>
+                        <option value="5">5 - Siempre</option>
+                    </select>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="pregunta8" class="form-label">¿Evitas ciertas situaciones o actividades porque te generan ansiedad o miedo?</label>
+                    <select class="form-select border-primary border-opacity-75 rounded" id="pregunta8" name="pregunta8" required>
+                        <option value="1">1 - Nunca</option>
+                        <option value="2">2 - Raramente</option>
+                        <option value="3">3 - A veces</option>
+                        <option value="4">4 - Frecuentemente</option>
+                        <option value="5">5 - Siempre</option>
+                    </select>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="pregunta9" class="form-label">¿Encuentras placer en las actividades que solías disfrutar? ¿Te sientes motivado para participar en estas actividades?</label>
+                    <select class="form-select border-primary border-opacity-75 rounded" id="pregunta9" name="pregunta9" required>
+                        <option value="1">1 - Nunca</option>
+                        <option value="2">2 - Raramente</option>
+                        <option value="3">3 - A veces</option>
+                        <option value="4">4 - Frecuentemente</option>
+                        <option value="5">5 - Siempre</option>
+                    </select>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="pregunta10" class="form-label">¿Tienes pensamientos negativos o intrusivos que te resultan difíciles de controlar?</label>
+                    <select class="form-select border-primary border-opacity-75 rounded" id="pregunta10" name="pregunta10" required>
+                        <option value="1">1 - Nunca</option>
+                        <option value="2">2 - Raramente</option>
+                        <option value="3">3 - A veces</option>
+                        <option value="4">4 - Frecuentemente</option>
+                        <option value="5">5 - Siempre</option>
+                    </select>
+                </div>
+    
+                <div class="text-center">
+                    <button type="submit" class="btn text-white" style="background-color: #2c387e;">Enviar</button>
+                </div>
+            </form>
+    
+            <div id="resultado" class="mt-4"></div>
         </div>
-    </div>
-</nav>
-<div class="container d-flex flex-column align-items-center mt-5">
-    <h1 class="text-white">Formulario de Salud Mental</h1>
-    <form id="formulario" class="bg-light p-5 rounded mt-4">
-        <div class="mb-3">
-            <label for="pregunta1" class="form-label">¿Con qué frecuencia sientes que no puedes controlar tus preocupaciones?</label>
-            <div class="escala">
-                <input type="radio" id="pregunta1_1" name="pregunta1" value="1">
-                <label for="pregunta1_1">1</label>
-                <input type="radio" id="pregunta1_2" name="pregunta1" value="2">
-                <label for="pregunta1_2">2</label>
-                <input type="radio" id="pregunta1_3" name="pregunta1" value="3">
-                <label for="pregunta1_3">3</label>
-                <input type="radio" id="pregunta1_4" name="pregunta1" value="4">
-                <label for="pregunta1_4">4</label>
-                <input type="radio" id="pregunta1_5" name="pregunta1" value="5">
-                <label for="pregunta1_5">5</label>
-            </div>
-        </div>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const nombreInput = document.getElementById('nombre');
+                const emailInput = document.getElementById('email');
+                const telefonoInput = document.getElementById('telefono');
+                const errorNombre = document.getElementById('error-nombre');
+                const errorEmail = document.getElementById('error-email');
+                const errorTelefono = document.getElementById('error-telefono');
+                const contadorTelefono = document.getElementById('contador-telefono');
+                const formulario = document.getElementById('formulario');
+                const resultadoDiv = document.getElementById('resultado');
+    
+                nombreInput.addEventListener('input', function () {
+                    const nombreValue = nombreInput.value;
+                    const regexNombre = /^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
+    
+                    if (!regexNombre.test(nombreValue)) {
+                        nombreInput.classList.add('invalid');
+                        errorNombre.style.display = 'block';
+                    } else {
+                        nombreInput.classList.remove('invalid');
+                        nombreInput.classList.add('valid');
+                        errorNombre.style.display = 'none';
+                    }
+                });
+    
+                emailInput.addEventListener('input', function () {
+                    const emailValue = emailInput.value;
+                    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+                    if (!regexEmail.test(emailValue) || !emailValue.endsWith('.com')) {
+                        emailInput.classList.add('invalid');
+                        errorEmail.style.display = 'block';
+                    } else {
+                        emailInput.classList.remove('invalid');
+                        emailInput.classList.add('valid');
+                        errorEmail.style.display = 'none';
+                    }
+                });
+    
+                telefonoInput.addEventListener('input', function () {
+                        const telefonoValue = telefonoInput.value;
+                        const regexTelefono = /^[0-9]*$/;
 
-        <div class="mb-3">
-            <label for="pregunta2" class="form-label">¿Te resulta difícil relajarte?</label>
-            <div class="escala">
-                <input type="radio" id="pregunta2_1" name="pregunta2" value="1">
-                <label for="pregunta2_1">1</label>
-                <input type="radio" id="pregunta2_2" name="pregunta2" value="2">
-                <label for="pregunta2_2">2</label>
-                <input type="radio" id="pregunta2_3" name="pregunta2" value="3">
-                <label for="pregunta2_3">3</label>
-                <input type="radio" id="pregunta2_4" name="pregunta2" value="4">
-                <label for="pregunta2_4">4</label>
-                <input type="radio" id="pregunta2_5" name="pregunta2" value="5">
-                <label for="pregunta2_5">5</label>
-            </div>
-        </div>
+                    if (!regexTelefono.test(telefonoValue) || telefonoValue.length !== 10) {
+                        telefonoInput.classList.add('invalid');
+                        telefonoInput.classList.remove('valid'); // Aseguramos que se remueva la clase 'valid'
+                        errorTelefono.style.display = 'block';
+                    } else {
+                        telefonoInput.classList.remove('invalid');
+                        telefonoInput.classList.add('valid');
+                        errorTelefono.style.display = 'none';
+                    }
+                        contadorTelefono.textContent = `${telefonoValue.length}/10`; 
+                });
+    
+                formulario.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    if (nombreInput.classList.contains('invalid') || 
+                        emailInput.classList.contains('invalid') || 
+                        telefonoInput.classList.contains('invalid')) {
+                        alert('Por favor, corrija los errores antes de enviar el formulario.');
+                        return;
+                    }
+    
+                    const respuestas = Array.from(formulario.querySelectorAll('select')).map(select => parseInt(select.value));
+                    const suma = respuestas.reduce((a, b) => a + b, 0);
+    
+                    let mensaje = '';
+                    if (suma <= 20) {
+                        mensaje = '<div class="alert alert-success" role="alert">No parece que tengas síntomas significativos de estrés o ansiedad.</div>';
+                    } else if (suma <= 30) {
+                        mensaje = '<div class="alert alert-warning" role="alert">Podrías estar experimentando algunos síntomas de estrés o ansiedad. Considera hablar con un profesional.</div>';
+                    } else {
+                        mensaje = '<div class="alert alert-danger" role="alert">Tus respuestas indican que podrías estar experimentando un alto nivel de estrés o ansiedad. Es recomendable buscar ayuda profesional.</div>';
+                    }
+    
+                    resultadoDiv.innerHTML = mensaje;
+                });
+            });
+        </script>
+    </body>
+    </html>
 
-        <div class="mb-3">
-            <label for="pregunta3" class="form-label">¿Has experimentado cambios significativos en tu apetito o peso recientemente?</label>
-            <div class="escala">
-                <input type="radio" id="pregunta3_1" name="pregunta3" value="1">
-                <label for="pregunta3_1">1</label>
-                <input type="radio" id="pregunta3_2" name="pregunta3" value="2">
-                <label for="pregunta3_2">2</label>
-                <input type="radio" id="pregunta3_3" name="pregunta3" value="3">
-                <label for="pregunta3_3">3</label>
-                <input type="radio" id="pregunta3_4" name="pregunta3" value="4">
-                <label for="pregunta3_4">4</label>
-                <input type="radio" id="pregunta3_5" name="pregunta3" value="5">
-                <label for="pregunta3_5">5</label>
-            </div>
-        </div>
 
-        <div class="mb-3">
-            <label for="pregunta4" class="form-label">¿Te sientes triste o deprimido la mayor parte del tiempo?</label>
-            <div class="escala">
-                <input type="radio" id="pregunta4_1" name="pregunta4" value="1">
-                <label for="pregunta4_1">1</label>
-                <input type="radio" id="pregunta4_2" name="pregunta4" value="2">
-                <label for="pregunta4_2">2</label>
-                <input type="radio" id="pregunta4_3" name="pregunta4" value="3">
-                <label for="pregunta4_3">3</label>
-                <input type="radio" id="pregunta4_4" name="pregunta4" value="4">
-                <label for="pregunta4_4">4</label>
-                <input type="radio" id="pregunta4_5" name="pregunta4" value="5">
-                <label for="pregunta4_5">5</label>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="pregunta5" class="form-label">¿Evitas situaciones o lugares porque te generan ansiedad?</label>
-            <div class="escala">
-                <input type="radio" id="pregunta5_1" name="pregunta5" value="1">
-                <label for="pregunta5_1">1</label>
-                <input type="radio" id="pregunta5_2" name="pregunta5" value="2">
-                <label for="pregunta5_2">2</label>
-                <input type="radio" id="pregunta5_3" name="pregunta5" value="3">
-                <label for="pregunta5_3">3</label>
-                <input type="radio" id="pregunta5_4" name="pregunta5" value="4">
-                <label for="pregunta5_4">4</label>
-                <input type="radio" id="pregunta5_5" name="pregunta5" value="5">
-                <label for="pregunta5_5">5</label>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="pregunta6" class="form-label">¿Tienes problemas para conciliar el sueño o mantenerte dormido?</label>
-            <div class="escala">
-                <input type="radio" id="pregunta6_1" name="pregunta6" value="1">
-                <label for="pregunta6_1">1</label>
-                <input type="radio" id="pregunta6_2" name="pregunta6" value="2">
-                <label for="pregunta6_2">2</label>
-                <input type="radio" id="pregunta6_3" name="pregunta6" value="3">
-                <label for="pregunta6_3">3</label>
-                <input type="radio" id="pregunta6_4" name="pregunta6" value="4">
-                <label for="pregunta6_4">4</label>
-                <input type="radio" id="pregunta6_5" name="pregunta6" value="5">
-                <label for="pregunta6_5">5</label>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="pregunta7" class="form-label">¿Te sientes culpable o sin valor?</label>
-            <div class="escala">
-                <input type="radio" id="pregunta7_1" name="pregunta7" value="1">
-                <label for="pregunta7_1">1</label>
-                <input type="radio" id="pregunta7_2" name="pregunta7" value="2">
-                <label for="pregunta7_2">2</label>
-                <input type="radio" id="pregunta7_3" name="pregunta7" value="3">
-                <label for="pregunta7_3">3</label>
-                <input type="radio" id="pregunta7_4" name="pregunta7" value="4">
-                <label for="pregunta7_4">4</label>
-                <input type="radio" id="pregunta7_5" name="pregunta7" value="5">
-                <label for="pregunta7_5">5</label>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="pregunta8" class="form-label">¿Tienes dificultades para concentrarte en tareas diarias?</label>
-            <div class="escala">
-                <input type="radio" id="pregunta8_1" name="pregunta8" value="1">
-                <label for="pregunta8_1">1</label>
-                <input type="radio" id="pregunta8_2" name="pregunta8" value="2">
-                <label for="pregunta8_2">2</label>
-                <input type="radio" id="pregunta8_3" name="pregunta8" value="3">
-                <label for="pregunta8_3">3</label>
-                <input type="radio" id="pregunta8_4" name="pregunta8" value="4">
-                <label for="pregunta8_4">4</label>
-                <input type="radio" id="pregunta8_5" name="pregunta8" value="5">
-                <label for="pregunta8_5">5</label>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="pregunta9" class="form-label">¿Te has sentido más irritable o impaciente de lo normal?</label>
-            <div class="escala">
-                <input type="radio" id="pregunta9_1" name="pregunta9" value="1">
-                <label for="pregunta9_1">1</label>
-                <input type="radio" id="pregunta9_2" name="pregunta9" value="2">
-                <label for="pregunta9_2">2</label>
-                <input type="radio" id="pregunta9_3" name="pregunta9" value="3">
-                <label for="pregunta9_3">3</label>
-                <input type="radio" id="pregunta9_4" name="pregunta9" value="4">
-                <label for="pregunta9_4">4</label>
-                <input type="radio" id="pregunta9_5" name="pregunta9" value="5">
-                <label for="pregunta9_5">5</label>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="pregunta10" class="form-label">¿Tienes pensamientos suicidas o autodestructivos?</label>
-            <div class="escala">
-                <input type="radio" id="pregunta10_1" name="pregunta10" value="1">
-                <label for="pregunta10_1">1</label>
-                <input type="radio" id="pregunta10_2" name="pregunta10" value="2">
-                <label for="pregunta10_2">2</label>
-                <input type="radio" id="pregunta10_3" name="pregunta10" value="3">
-                <label for="pregunta10_3">3</label>
-                <input type="radio" id="pregunta10_4" name="pregunta10" value="4">
-                <label for="pregunta10_4">4</label>
-                <input type="radio" id="pregunta10_5" name="pregunta10" value="5">
-                <label for="pregunta10_5">5</label>
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-pidp6ETsFzgsA4sEozu+mtfZQx6XfTtM5QeYFfGkq4F5b8ND7p2f5E5Gz5qsi0I7" crossorigin="anonymous"></script>
-</body>
-</html>
+    

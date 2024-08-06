@@ -27,11 +27,50 @@ body {
       border-radius: 5px;
   }
 
-.test-container {
-    max-width: 600px;
-    margin: auto;
+  body {
+    background-color: #f7f7f7;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    background-color: #ffffff;
     padding: 2rem;
-    background-color: #b2ebf2;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #2c387e;
+}
+
+.form-control {
+    border: 2px solid #2c387e;
+}
+
+.btn {
+    background-color: #2c387e;
+}
+
+.btn:hover {
+    background-color: #1e2856;
+}
+
+.error-message {
+    display: none;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.invalid {
+    border-color: #ff0000;
+}
+
+.valid {
+    border-color: #00ff00;
+}
+
+.character-count {
+    font-size: 0.9rem;
+    color: #666666;
+    margin-top: 0.5rem;
 }

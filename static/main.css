@@ -1983,8 +1983,8 @@
 	input[type="button"],
 	button,
 	.button {
-		background-color: #f2f2f2;
-		color: #000 !important;
+		background-color: #6FA8AD;
+		color: #ffffff !important;
 	}
 
 		input[type="submit"]:hover,
@@ -1992,7 +1992,7 @@
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			background-color: white;
+			background-color: rgb(24, 31, 32);
 		}
 
 		input[type="submit"]:active,
@@ -4338,6 +4338,45 @@ p {
 }
 
 .legend {
+    font-size: 25px;
+    color: #000000;
+}
+
+.btn2-custom {
+    background-color: #ffffff00;
+    color: #fff;
+    transition: background-color 0.3s, border 0.3s;
+	position: relative;
+	right: 40px;
+	text-align: center;
+}
+
+.btn2-custom:hover {
+    background-color: #242323cb;
+	transform: scale(1.3);
+}
+
+.legend2 {
+    font-size: 25px;
+    color: #000000;
+}
+.btn3-custom {
+    background-color: #5B6670;
+    color: #fff;
+    transition: background-color 0.3s, border 0.3s;
+	position: relative;
+	right: 10px;
+	text-align: center;
+	padding: 10px 20px; /* Ajusta el espaciado interno */
+    font-size: 13px;
+}
+
+.btn3-custom:hover {
+    background-color: #242323cb;
+	transform: scale(1.3);
+}
+
+.legend3 {
     font-size: 25px;
     color: #000000;
 }
