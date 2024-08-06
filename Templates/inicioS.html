@@ -5,44 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log-in</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
-<body class="bg-dark.bg-gradient">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand text-white" href="/">Project Mental Balance</a>
+          <a class="navbar-brand" href="/">Project Mental Balance</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
             <ul class="navbar-nav ms-auto">
+              <!-- Nav items here if needed -->
             </ul>
           </div>
         </div>
-      </nav>
-    <div class="container mb-2 mt-4" >
-        <label for="formGroupExampleInput" class="form-label fs-2 text-black fw-semibold" style="display: flex; justify-content: center;">Inicio de sesión</label>
-        <form action="/inicioS" method="post" onsubmit="return validateForm()">
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">Usuario</label>
-                <input type="text" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="username" name="username">
-            </div>
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">Contraseña</label>
-                <input type="password" class="form-control border-primary border-opacity-75 rounded" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="password" name="password">
-            </div>
-            <div style="display: flex; justify-content: center;">
-                <button type="submit">Entrar</button>
-            </div>
-            <div style="display: flex; justify-content: right;">
-                <label for="formGroupExampleInput" class="form-label mt-4 mb-2">¿Aún no tienes una cuenta?</label><br>
-            </div>
-            <div style="display: flex; justify-content: right;">
-                <a href="/registrOp" class="button">Registrarse</a>
-            </div>
-        </form>
+    </nav>
+    <div class="container mt-4 d-flex justify-content-center">
+        <div class="card p-4" style="width: 100%; max-width: 400px;">
+            <label for="formGroupExampleInput" class="form-label fs-2 fw-semibold text-center">Inicio de sesión</label>
+            <form action="/inicioS" method="post" onsubmit="return validateForm()">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Usuario</label>
+                    <input type="text" class="form-control rounded" id="username" name="username">
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control rounded" id="password" name="password">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-custom">Entrar</button>
+                </div>
+                <div class="text-end mt-4 mb-2">
+                    <label for="formGroupExampleInput" class="form-label">¿Aún no tienes una cuenta?</label>
+                </div>
+                <div class="text-end">
+                    <a href="/registrOp" class="button">Registrarse</a>
+                </div>
+            </form>
+        </div>
     </div>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -66,5 +67,6 @@
             return true;
         }
     </script>
+
 </body>
 </html>

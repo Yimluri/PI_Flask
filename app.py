@@ -1,23 +1,16 @@
 from flask import Flask, request, render_template, url_for, redirect, session, flash
-from flask_mysqldb import MySQL
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'PI_3'
-app.config['MYSQL_PORT'] = 3307
 
-mysql = MySQL(app)
-app.secret_key = 'mysecretkey'
 
 
 @app.route('/')
 def home():
     print("Session:", session)
-    return render_template('index.html')
+    return render_template('index2.html')
 
 
 
