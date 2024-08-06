@@ -34,27 +34,28 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="container-fluid">
-            <a class="navbar-brand text-white" href="/">Project Mental Balance</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/test">Test</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/directorio">Directorio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/logout">Salir</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<header id="header" class="alt">
+    <div class="logo">
+        <a href="/">Project <span>MENTAL BALANCE</span></a>
+    </div>
+    {% if session.get('logged_in') %}
+        <a href="#menu">Menu</a>
+    {% else %}
+        <a class="button" href="/inicioS">INICIAR SESION</a>
+    {% endif %}
+</header>
+
+{% if session.get('logged_in') %}
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/test">TEST</a></li>
+        <li><a href="/directorio">DIRECTORIO</a></li>
+        <li><a href="/logout" class="nav-link text-white"></a></li>
+    </ul>
+</nav>
+{% endif %}
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
