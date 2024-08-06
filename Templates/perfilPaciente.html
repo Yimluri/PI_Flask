@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Paciente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='perfil.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function confirmUpdate(event) {
@@ -34,7 +34,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid">
             <a class="navbar-brand text-white" href="/">Project Mental Balance</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,6 @@
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
-    .
     <div class="alert alert-primary alert-dismissible fade show mt-3" role="alert">
         <strong>{{message}}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -68,42 +67,42 @@
     {% endwith %}
     <div class="container mt-4">
         <!-- Contenedor del formulario -->
-        <div class="container-lg p-3 border border-primary rounded-4">
+        <div class="container-lg p-3 border-primary border-opacity-75 rounded-4 container-custom">
             <h2 class="text-center fs-2 text-black fw-semibold">Perfil de Paciente</h2>
             <form action="/perfil" method="post" onsubmit="confirmUpdate(event)">
-                <div class="mb-3">
+                <div class="mb-3 form-group-custom">
                     <label for="txtNombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtNombre" name="txtNombre" value="{{ nombre }}">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 form-group-custom">
                     <label for="txtApellidoPaterno" class="form-label">Apellido Paterno</label>
                     <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtApellidoPaterno" name="txtApellidoPaterno" value="{{ apellido_paterno }}">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 form-group-custom">
                     <label for="txtApellidoMaterno" class="form-label">Apellido Materno</label>
                     <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtApellidoMaterno" name="txtApellidoMaterno" value="{{ apellido_materno }}">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 form-group-custom">
                     <label for="txtGenero" class="form-label">Género</label>
                     <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtGenero" name="txtGenero" value="{{ genero }}">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 form-group-custom">
                     <label for="txtFechaNacimiento" class="form-label">Fecha de Nacimiento</label>
                     <input type="date" class="form-control border-primary border-opacity-75 rounded" id="txtFechaNacimiento" name="txtFechaNacimiento" value="{{ fecha_nacimiento }}">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 form-group-custom">
                     <label for="txtTelefono" class="form-label">Teléfono</label>
                     <input type="text" class="form-control border-primary border-opacity-75 rounded" id="txtTelefono" name="txtTelefono" value="{{ telefono }}">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 form-group-custom">
                     <label for="txtEmail" class="form-label">Email</label>
                     <input type="email" class="form-control border-primary border-opacity-75 rounded" id="txtEmail" name="txtEmail" value="{{ email }}">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 form-group-custom">
                     <label for="txtPassword" class="form-label">Contraseña</label>
                     <input type="password" class="form-control border-primary border-opacity-75 rounded" id="txtPassword" name="txtPassword" value="{{ password }}">
                 </div>
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center button-container">
                     <button type="submit" class="button">Actualizar</button>
                     <a href="{{ url_for('delete_profile') }}" class="button" onclick="confirmDelete(event)">Eliminar Perfil</a>
                 </div>

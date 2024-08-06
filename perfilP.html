@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
         .profile-info {
             border: 1px solid #ccc;
             padding: 15px;
@@ -22,8 +19,8 @@
     </style>
 </head>
 <body>
-    <div class="profile-info">
-        <h2>Perfil de Usuario</h2>
+    <div class="profile-info container-custom border-primary border-opacity-75 rounded">
+        <h2 class="text-center fs-2 text-black fw-semibold">Perfil de Usuario</h2>
         <p><strong>Nombre:</strong> {{ nombre }}</p>
         <p><strong>Apellido Paterno:</strong> {{ apellido_paterno }}</p>
         <p><strong>Apellido Materno:</strong> {{ apellido_materno }}</p>
