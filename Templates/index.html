@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='cssinicioS.css') }}">
 </head>
 <body class="bg-dark.bg-gradient">
-<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white" href="/">Project Mental Balance</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand text-white" href="/">Project Mental Balance</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
@@ -24,21 +24,20 @@
                 <a class="nav-link text-white" href="/directorio">Directorio</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link text-white" href="/perfil">Perfil</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link text-white" href="/logout">Salir</a>
               </li>
             {%else%}
-
+              <li class="nav-item">
+                <a class="nav-link text-white" href="/inicioS">Iniciar Sesión o registrarse</a>
+              </li>
             {% endif %}
-        </ul>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/inicioS">Iniciar Sesión o registrarse</a>
-                </li>
             </ul>
+          </div>
         </div>
-    </div>
-</nav>
+      </nav>
 
 <div class="container-lg mt-5 mb-5 w-75 p-3 border-opacity-75 rounded-4" style="background-color: rgba(255,255,255,0.5);">
     <p class="fw-semibold fs-2">Bienvenido!!</p>
