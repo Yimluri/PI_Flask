@@ -5,10 +5,19 @@
 </head><body>
 
 <!-- Header -->
-<header id="header" class="alt"><div class="logo"><a href="/">Project <span>MENTAL BALANCE</span></a></div>
-	<a class="button"  href="/inicioS"> INICIAR SESION </a>
-	<a href="#menu">Menu</a>
-</header><!-- Nav -->
+<header id="header" class="alt">
+    <div class="logo">
+        <a href="/">Project <span>MENTAL BALANCE</span></a>
+    </div>
+    {% if session.get('logged_in') %}
+        <a href="#menu">Menu</a>
+    {% else %}
+        <a class="button" href="/inicioS">INICIAR SESION</a>
+    {% endif %}
+</header>
+
+{% if session.get('logged_in') %}
+<!-- Nav -->
 <nav id="menu">
     <ul class="links">
         <li><a href="/">Inicio</a></li>
@@ -16,6 +25,8 @@
         <li><a href="/directorio">DIRECTORIO</a></li>
     </ul>
 </nav>
+{% endif %}
+
 
 <!-- Banner -->
 <section class="banner full">
