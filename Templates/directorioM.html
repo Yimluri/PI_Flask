@@ -8,27 +8,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body class="bg-dark.bg-gradient">
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand text-white" href="/">Project Mental Balance</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" href="/test">Test</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="/perfil">Perfil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="/logout">Salir</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
+  <header id="header" class="alt">
+    <div class="logo">
+        <a href="/">Project <span>MENTAL BALANCE</span></a>
+    </div>
+    {% if session.get('logged_in') %}
+        <a href="#menu">Menu</a>
+    {% else %}
+        <a class="button" href="/inicioS">INICIAR SESION</a>
+    {% endif %}
+</header>
+
+{% if session.get('logged_in') %}
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/test">TEST</a></li>
+        <li><a href="/directorio">DIRECTORIO</a></li>
+        <li><a href="/perfil">PERFIL</a></li>
+        <li><a href="/logout" class="nav-link text-white">SALIR</a></li>
+    </ul>
+</nav>
+{% endif %}
 <div class="row">
 <div class="col-md-6">
 
@@ -36,16 +38,16 @@
         <label for="formGroupExampleInput" class="form-label fs-2 text-white fw-semibold" style="display: flex; justify-content: center;">Ansiedad</label>
         <div class="list-group">
             <a href="/perfilMedico" class="list-group-item list-group-item-action">
-                <label class="form-label fs-4 fw-semibold"> Jimena lugo Arriola</label>
-                <label class="form-label fs-5"> Especializada en el tratamiento de trastornos de ansiedad y depresión, utilizando terapias cognitivo-conductuales para ayudar a sus pacientes a manejar sus síntomas y mejorar su calidad de vida</label>
+                <label class="form-label fs-4 fw-semibold"> USUARIO1</label>
+                <label class="form-label fs-5"> Descripción del profesional</label>
             </a>
             <a href="/perfilMedico" class="list-group-item list-group-item-action">
-                <label class="form-label fs-4 fw-semibold"> Carlos Mendez</label>
-                <label class="form-label fs-5"> Se centra en el desarrollo emocional y conductual de los niños, trabajando con familias para abordar problemas como el TDAH, el autismo y otros trastornos del desarrollo.</label>
+                <label class="form-label fs-4 fw-semibold">  USUARIO2</label>
+                <label class="form-label fs-5"> Descripción del profesional</label>
             </a>
             <a href="/perfilMedico" class="list-group-item list-group-item-action">
-                <label class="form-label fs-4 fw-semibold"> Elena Rodríguez</label>
-                <label class="from-label fs-5">Trabaja en la intersección de la psicología y el sistema legal, realizando evaluaciones psicológicas para casos judiciales y proporcionando testimonios de expertos en tribunales.</label>
+                <label class="form-label fs-4 fw-semibold"> USUARIO3</label>
+                <label class="from-label fs-5">Descripción del profesional</label>
             </a>
           </div>
     </div>
@@ -56,21 +58,26 @@
         <label for="formGroupExampleInput" class="form-label fs-2 text-white fw-semibold" style="display: flex; justify-content: center;">Depresión</label>
         <div class="list-group">
             <a href="/perfilMedico" class="list-group-item list-group-item-action">
-                <label class="from-label fs-4 fw-semibold">Dominic Santiago</label>
-                <label class="from-label fs-5">Enfocado en mejorar los procesos de enseñanza y aprendizaje, trabaja con escuelas y estudiantes para desarrollar programas educativos y estrategias de intervención para superar dificultades académicas.</label>
+                <label class="from-label fs-4 fw-semibold">USUARIO4</label>
+                <label class="from-label fs-5">Descripción del profesional</label>
             </a>
             <a href="/perfilMedico" class="list-group-item list-group-item-action">
-                <label class="form-label fs-4 fw-semibold"> Ana Morales</label>
-                <label class="form-label fs-5"> Se dedica a mejorar la dinámica en el lugar de trabajo, abordando problemas de estrés laboral, motivación y desarrollo de liderazgo a través de programas de bienestar y capacitación.</label>
+                <label class="form-label fs-4 fw-semibold"> USUARIO5</label>
+                <label class="form-label fs-5">Descripción del profesional</label>
             </a>
             <a href="/perfilMedico" class="list-group-item list-group-item-action">
-                <label class="form-label fs-4 fw-semibold"> Pedro García</label>
-                <label class="from-label fs-5">Especialista en la promoción de la salud y el bienestar, ayuda a los pacientes a manejar enfermedades crónicas y promueve hábitos de vida saludables mediante terapias de apoyo y programas educativos.</label>
+                <label class="form-label fs-4 fw-semibold"> USUARIO6</label>
+                <label class="from-label fs-5">Descripción del profesional</label>
             </a>
       </div>
 </div>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.scrollex.min.js"></script>
+    <script src="/static/js/skel.min.js"></script>
+    <script src="/static/js/util.js"></script>
+    <script src="/static/js/main.js"></script>
 </body>
 </html>
